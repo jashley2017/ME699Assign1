@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+
+<robot name="2Hands10Joints">
+  <link name="base_link">
+    <visual>
+        <geometry> <box size="0.3 0.3 0.1" /> </geometry>
+        <material name="grey"><color rgba="0.2 0.2 0.2 1.0" /> </material>
+    </visual>
+  </link>
+
+  <link name="link1">
+    <visual>
+      <origin xyz="0 0 0.2"/>
+      <geometry> <cylinder radius="0.15" length="0.4" /> </geometry>
+      <material name="white"><color rgba="1.0 1.0 1.0 1.0" /> </material>
+    </visual>
+  </link>
+  <joint name="shoulder1" type="continuous">
+    <parent link="base_link" />
+    <child link="link1"/>
+    <origin xyz="0 0 0.05" rpy = "0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.1"/>
+  </joint>
+  <link name="link2">
+    <visual>
+      <!--
+      <origin xyz="0.075 0 0"/>
+      -->
+      <geometry> <cylinder radius="0.15" length="0.4" /> </geometry>
+      <material name="grey"/>
+    </visual>
+  </link>
+
+  <joint name="shoulder2" type="continuous">
+    <parent link="link1" />
+    <child link="link2"/>
+    <origin xyz="0 0 0.45" rpy = "0 -1.57079 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.1"/>
+  </joint>
+
+  <link name="left1">
+    <visual>
+      <!--
+      <origin xyz="0 -0.15 0"/>
+      -->
+      <geometry> <cylinder radius="0.15" length="0.4" /> </geometry>
+      <material name="white"><color rgba="1.0 1.0 1.0 1.0" /> </material>
+    </visual>
+  </link>
+
+  <link name="right1">
+    <visual>
+      <!--
+      <origin xyz="0 -0.15 0"/>
+      -->
+      <geometry> <cylinder radius="0.15" length="0.4" /> </geometry>
+      <material name="white"><color rgba="1.0 1.0 1.0 1.0" /> </material>
+    </visual>
+  </link>
+
+  <link name="right2">
+    <visual>
+      <!--
+      <origin xyz="0.075 0 0"/>
+      -->
+      <geometry> <cylinder radius="0.1" length="0.3" /> </geometry>
+      <material name="grey"/>
+    </visual>
+  </link>
+
+  <link name="right3">
+    <visual>
+      <!--
+      <origin xyz="0.075 0 0"/>
+      -->
+      <geometry> <cylinder radius="0.1" length="0.3" /> </geometry>
+      <material name="white"/>
+    </visual>
+  </link>
+
+  <link name="right4">
+    <visual>
+      <!--
+      <origin xyz="0.075 0 0"/>
+      -->
+      <geometry> <cylinder radius="0.1" length="0.3" /> </geometry>
+      <material name="grey"/>
+    </visual>
+  </link>
+
+  <link name="left2">
+    <visual>
+      <!--
+      <origin xyz="0.075 0 0"/>
+      -->
+      <geometry> <cylinder radius="0.1" length="0.3" /> </geometry>
+      <material name="grey"/>
+    </visual>
+  </link>
+
+  <joint name="shoulder_left" type="continuous">
+    <parent link="link2"/>
+    <child link="left1" />
+    <origin xyz="0 0 0.2" rpy="-1.57079 0  0" />
+    <axis xyz="0 0 1" />
+    <dynamics damping="0.1"/>
+  </joint>
+
+  <joint name="shoulder_right" type="continuous">
+    <parent link="link2"/>
+    <child link="right1" />
+    <origin xyz="0 0 -0.2" rpy="-1.57079 0  0" />
+    <axis xyz="0 0 1" />
+    <dynamics damping="0.1"/>
+  </joint>
+
+  <joint name="elbow_right" type="continuous">
+    <parent link="right1"/>
+    <child link="right2" />
+    <origin xyz="0.3 0 0" rpy="0 1.57079 0" />
+    <axis xyz="0 0 1" />
+    <dynamics damping="0.1"/>
+  </joint>
+
+  <joint name="elbow_left" type="continuous">
+    <parent link="left1"/>
+    <child link="left2" />
+    <origin xyz="0.3 0 0" rpy="0 1.57079 0" />
+    <axis xyz="0 0 1" />
+    <dynamics damping="0.1"/>
+  </joint>
+
+  <joint name="wrist_right1" type="continuous">
+    <parent link="right2" />
+    <child link="right3" />
+    <origin xyz="0 0 0.15" rpy="1.57079 0 0" />
+    <axis xyz="0 0 1" />
+    <dynamics damping="0.1"/>
+  </joint>
+
+  <joint name="wrist_right2" type="continuous">
+    <parent link="right3" />
+    <child link="right4" />
+    <origin xyz="0 0.15 0" rpy="-1.57079 0 0" />
+    <axis xyz="0 0 1" />
+    <dynamics damping="0.1"/>
+  </joint>  
+    
+  <link name="right_endeffector">
+    <inertial>
+      <origin xyz="0.0 0 0" rpy="0 0 0" />
+      <mass value="1" />
+      <inertia ixx="1" ixy="0" ixz="0" iyy="0.33" iyz="0" izz="1" />
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0 0 "/>
+      <geometry> <sphere radius="0.1" /></geometry>
+      <material name="blue"> <color rgba="0 0 1 1" /> </material>
+    </visual>
+  </link>
+
+  <joint name="right_endjoint" type="fixed">
+    <parent link="right4" />
+    <child link="right_endeffector" />
+    <origin xyz="0 0.0 0.15" rpy="0.0 0 0 "/>
+  </joint>
+
+  <link name="left3">
+    <visual>
+      <!--
+      <origin xyz="0.075 0 0"/>
+      -->
+      <geometry> <cylinder radius="0.1" length="0.3" /> </geometry>
+      <material name="white"/>
+    </visual>
+  </link>
+
+  <link name="left4">
+    <visual>
+      <!--
+      <origin xyz="0.075 0 0"/>
+      -->
+      <geometry> <cylinder radius="0.1" length="0.3" /> </geometry>
+      <material name="grey"/>
+    </visual>
+  </link>
+
+  <joint name="wrist_left1" type="continuous">
+    <parent link="left2" />
+    <child link="left3" />
+    <origin xyz="0 0 0.15" rpy="1.57079 0 0" />
+    <axis xyz="0 0 1" />
+    <dynamics damping="0.1"/>
+  </joint>
+
+  <joint name="wrist_left2" type="continuous">
+    <parent link="left3" />
+    <child link="left4" />
+    <origin xyz="0 0.15 0" rpy="-1.57079 0 0" />
+    <axis xyz="0 0 1" />
+    <dynamics damping="0.1"/>
+  </joint>  
+    
+  <link name="left_endeffector">
+    <inertial>
+      <origin xyz="0.0 0 0" rpy="0 0 0" />
+      <mass value="1" />
+      <inertia ixx="1" ixy="0" ixz="0" iyy="0.33" iyz="0" izz="1" />
+    </inertial>
+    <visual>
+      <origin xyz="0.0 0 0 "/>
+      <geometry> <sphere radius="0.1" /></geometry>
+      <material name="red"> <color rgba="1 0 0 1" /> </material>
+    </visual>
+  </link>
+
+  <joint name="left_endjoint" type="fixed">
+    <parent link="left4" />
+    <child link="left_endeffector" />
+    <origin xyz="0 0.0 0.15" rpy="0.0 0 0 "/>
+  </joint>
+
+
+</robot>
