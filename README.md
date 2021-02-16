@@ -24,4 +24,4 @@ move_endeffector!(left_body, -0.7, 0.7, 0.7) ; # move left end effector (red)
 
 The result should look something like this!
 
-<img src="https://github.com/jashley2017/ME699Assign1/move_endeffector_result.JPG" width = "400">
+<img src="https://github.com/jashley2017/ME699Assign1/blob/master/move_endeffector_result.JPG" width = "400">
